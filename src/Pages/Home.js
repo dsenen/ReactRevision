@@ -1,4 +1,6 @@
 import FilterableProductTable from "../Components/FilterableProductTable";
+import PRODUCTS from "../products";
+
 
 const Home = () => {
     return (
@@ -10,7 +12,7 @@ const Home = () => {
         <h2>This is Thinking in React</h2>
         <p>From this <a href="https://reactjs.org/docs/thinking-in-react.html" target="_blank" rel="noreferrer">website</a></p>
 
-        <FilterableProductTable />
+        <FilterableProductTable products={PRODUCTS}/>
 
       </div>
     );

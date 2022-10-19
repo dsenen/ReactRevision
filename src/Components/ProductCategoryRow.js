@@ -1,9 +1,9 @@
 import React from "react";
-import PRODUCTS from "../products";
 
 class ProductCategoryRow extends React.Component {
+
     render() {
-      const category = PRODUCTS[0].category;
+      const category = this.props.category;
 
       return (
         <tr>
