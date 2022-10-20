@@ -4,10 +4,23 @@ import ProductRow from "../Components/ProductRow";
 
 class ProductTable extends React.Component {
     render() {
+      const filterText = this.props.filterText;
+      const inStockOnly = this.props.inStockOnly;
+
+      console.log('ProductTable.js', typeof(filterText), filterText)
+
       const rows = [];
       let lastCategory = null;
       
       this.props.products.forEach((product) => {
+        console.log('product.name.indexOf(filterText)', product.name.indexOf(filterText));
+        console.log('product.name', product.name);
+        if (product.name.indexOf(filterText) === -1) {
+          return;
+        }
+        if (inStockOnly && !product.stocked) {
+          return;
+        }
         if (product.category !== lastCategory) {
           rows.push(
             <ProductCategoryRow
