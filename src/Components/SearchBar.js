@@ -1,44 +1,39 @@
 import React from "react";
 
-class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
-    this.handleInStockChange = this.handleInStockChange.bind(this);
+const SearchBar = (props) => {
+
+  // console.log('props.onFilterTextChange', props.onFilterTextChange);
+  
+  const handleFilterTextChange = (e) => {
+    // console.log('handleFilterTextChange e.target.value', e.target.value);
+    // console.log('props.onFilterTextChange(e.target.value)', props.onFilterTextChange(e.target.value));
+
+    props.onFilterTextChange(e.target.value);
   }
   
-  handleFilterTextChange(e) {
-    this.props.onFilterTextChange(e.target.value);
-  }
-  
-  handleInStockChange(e) {
-    this.props.onInStockChange(e.target.checked);
-  }
-    render() {
-
-      const filterText = this.props.filterText;
-      const inStockOnly = this.props.inStockOnly;
-      console.log('SearchBar.js--> filterText', filterText)
-      return (
-        <form>
-          <input 
-            type="text"
-            placeholder="Search..."
-            value={filterText}
-            onChange={this.handleFilterTextChange}
-          />
-          <p>
-            <input
-              type="checkbox"
-              checked={inStockOnly}
-              onChange={this.handleInStockChange}
-            />
-            {' '}
-            Only show products in stock
-          </p>
-        </form>
-      );
-    }
+  const handleInStockChange = (e) => {
+    props.onInStockChange(e.target.checked);
   }
 
-  export default SearchBar;
+  return (
+    <form>
+      <input
+        type="text"
+        placeholder="Search..."
+        value={props.filterText}
+        onChange={handleFilterTextChange}
+      />
+      <p>
+        <input
+          type="checkbox"
+          checked={props.inStockOnly}
+          onChange={handleInStockChange}
+        />
+        {' '}
+        Only show products in stock
+      </p>
+    </form>
+  );
+}
+
+export default SearchBar;

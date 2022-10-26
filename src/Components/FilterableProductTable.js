@@ -1,47 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import ProductTable from "./ProductTable";
 
-class FilterableProductTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      filterText: '',
-      inStockOnly: false
-    };
+const FilterableProductTable = (props) => {
 
-    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
-    this.handleInStockChange = this.handleInStockChange.bind(this);
-  }
+  const [ filterText, setFilterText ] = useState('');
+  const [ inStockOnly, setInStockOnly ] = useState(false);
 
-  handleFilterTextChange(filterText) {
-    this.setState({
-      filterText: filterText
-    });
+  // console.log('filterText -->', filterText, '<--');
+  // console.log('inStockOnly -->', inStockOnly, '<--');
+
+  const handleFilterTextChange = (filterText) => {
+    setFilterText(filterText);
+    // console.log('FilterableProductTable handleFilterTextChange filterText', filterText);
   }
   
-  handleInStockChange(inStockOnly) {
-    this.setState({
-      inStockOnly: inStockOnly
-    })
-  }
-    render() {
-      return (
-        <div>
-          <SearchBar
-            filterText={this.state.filterText}
-            inStockOnly={this.state.inStockOnly}
-            onFilterTextChange={this.handleFilterTextChange}
-            onInStockChange={this.handleInStockChange}
-          />
-          <ProductTable
-            products={this.props.products}
-            filterText={this.state.filterText}
-            inStockOnly={this.state.inStockOnly}
-          />
-        </div>
-      );
-    }
+  const handleInStockChange = (inStockOnly) => {
+    setInStockOnly(inStockOnly);
   }
 
-  export default FilterableProductTable;
+  // console.log('FilterableProductTable props.products', props.products);
+
+  return (
+    <div>
+      <SearchBar
+        filterText={filterText}
+        inStockOnly={inStockOnly}
+        onFilterTextChange={handleFilterTextChange}
+        onInStockChange={handleInStockChange}
+      />
+      <ProductTable
+        products={props.products}
+        filterText={filterText}
+        inStockOnly={inStockOnly}
+      />
+    </div>
+  );
+}
+
+export default FilterableProductTable;
